@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-resources
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-resources
+  template:
+    metadata:
+      labels:
+        app: app-resources
+    spec:
+      containers:
+      - name: app
+        image: gcr.io/k8s-k3s/demo:v.1.0.0
+        resources:
+          requests:
+            memory: 256Mi
+          limits:
+            memory: 1024Mi

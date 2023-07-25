@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cleanup-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: cleanup-container
+        image: cleanup-image
+        command: ["sh", "-c", "cleanup.sh"]
+      restartPolicy: Never
+  backoffLimit: 4

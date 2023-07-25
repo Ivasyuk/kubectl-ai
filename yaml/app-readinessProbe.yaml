@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-readinessProbe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-readinessProbe
+  template:
+    metadata:
+      labels:
+        app: app-readinessProbe
+    spec:
+      containers:
+      - name: app-readinessProbe
+        image: gcr.io/k8s-k3s/demo:v.1.0.0
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1

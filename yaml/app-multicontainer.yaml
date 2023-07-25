@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-multicontainer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-multicontainer
+  template:
+    metadata:
+      labels:
+        app: app-multicontainer
+    spec:
+      containers:
+      - name: main
+        image: gcr.io/k8s-k3s/demo:v1.0.0
+        ports:
+        - containerPort: 80
+      - name: sidecar
+        image: sidecar-image:v1.0.0
+        ports:
+        - containerPort: 8080
+      - name: another-sidecar
+        image: another-sidecar-image:v.1.0.0
+        ports:
+        - containerPort: 8081
